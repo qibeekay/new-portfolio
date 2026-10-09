@@ -1,0 +1,280 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE — DO NOT DELETE THIS COMMENT */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Bangers&family=Comic+Neue:wght@400;700&family=Special+Elite&family=Shippori+Mincho:wght@400;600;800&family=Zen+Antique&family=Inter:wght@400;500;600;700&display=swap");
+
+/* CRITICAL: SINGLE TAILWIND IMPORT — replaces the old base/components/utilities imports. DO NOT DELETE */
+@import "tailwindcss";
+
+/* ---------- Tailwind v4 theme (replaces tailwind.config.js entirely) ---------- */
+/*
+  `inline` is REQUIRED here: our tokens reference runtime CSS variables that the
+  .theme-comic / .theme-workspace / .theme-edo scopes re-ink at runtime.
+  With `inline`, utilities resolve var(--ink) / var(--font-sans) at the element,
+  so theme switching keeps working.
+*/
+@theme inline {
+  /* Colors — var-driven Studio tokens (opacity modifiers work via color-mix) */
+  --color-ink: rgb(var(--ink));
+  --color-ink-soft: #3b352d;
+  --color-paper: rgb(var(--paper));
+  --color-paper-light: #fffdf6;
+  --color-paper-dark: #e3d5b4;
+  --color-surface: rgb(var(--surface));
+  --color-accent: rgb(var(--accent));
+
+  /* Pulp palette */
+  --color-pulp-red: #e63946;
+  --color-pulp-yellow: #f4a300;
+  --color-pulp-blue: #2f6690;
+  --color-pulp-teal: #1d7874;
+
+  /* Washi / Sumi */
+  --color-washi: #efe6d3;
+  --color-washi-light: #f7f1e4;
+  --color-washi-dark: #ddd0b6;
+  --color-sumi: #1c1a17;
+  --color-sumi-soft: #4a463e;
+  --color-sumi-wash: #7d776b;
+
+  /* Edo palette */
+  --color-edo-indigo: #27415f;
+  --color-edo-vermilion: #b23a2c;
+  --color-edo-matcha: #6a7a4b;
+  --color-edo-gold: #a5813c;
+
+  /* Workspace palette */
+  --color-work-plum: #3f0e40;
+  --color-work-plum-dark: #350d36;
+  --color-work-plum-hover: #4d1a4e;
+  --color-work-ink: #1d1c1d;
+  --color-work-muted: #616061;
+  --color-work-line: #e2e0e2;
+  --color-work-hover: #f6f5f6;
+  --color-work-canvas: #ffffff;
+  --color-work-blue: #1264a3;
+  --color-work-green: #2eb67d;
+  --color-work-yellow: #ecb22e;
+  --color-work-red: #e01e5a;
+
+  /* Fonts — reference the runtime CSS vars defined in :root / theme scopes below */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-body: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  --font-caption: "Special Elite", "Courier New", monospace;
+  --font-edo: "Shippori Mincho", Georgia, serif;
+  --font-edo-accent: "Zen Antique", "Shippori Mincho", serif;
+
+  /* Shadows (shadow-panel, shadow-panel-sm, ...) */
+  --shadow-panel: 6px 6px 0 0 #141210;
+  --shadow-panel-sm: 3px 3px 0 0 #141210;
+  --shadow-panel-lg: 10px 10px 0 0 #141210;
+  --shadow-panel-red: 6px 6px 0 0 #e63946;
+
+  /* Easing (ease-pulp) */
+  --ease-pulp: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Animation (animate-jitter) — keyframes defined inside @theme are
+     emitted only when the animation utility is used */
+  --animate-jitter: jitter 0.5s steps(2, end) infinite;
+  @keyframes jitter {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(-1px, 1px) rotate(-0.4deg);
+    }
+    50% {
+      transform: translate(1px, -1px) rotate(0.3deg);
+    }
+    75% {
+      transform: translate(1px, 1px) rotate(-0.2deg);
+    }
+  }
+}
+
+/* ---------- Studio (base) ---------- */
+:root {
+  --ink: 10 10 11;
+  --surface: 20 20 22;
+  --paper: 237 234 227;
+  --accent: 255 94 58;
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+}
+
+html {
+  background: rgb(var(--ink));
+}
+body {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+::selection {
+  background: rgb(var(--accent));
+  color: rgb(var(--ink));
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Marquee (kept as plain CSS — keyframes only emitted when used would
+   break the .marquee-wrap hover pause, so this stays hand-rolled) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 50s linear infinite;
+}
+.marquee-wrap:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---------- Theme scopes ---------- */
+.theme-comic {
+  --paper: 244 236 214;
+  --ink: 20 18 16;
+  --font-display: "Bangers", Impact, sans-serif;
+  min-height: 100vh;
+  background-color: #f4ecd6;
+  color: #141210;
+  font-family: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+}
+.theme-comic ::selection {
+  background: #f4a300;
+  color: #141210;
+}
+.theme-workspace {
+  --font-sans: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
+  color: #1d1c1d;
+}
+.theme-edo {
+  color: #1c1a17;
+}
+
+/* ---------- Comic ---------- */
+.paper-grain {
+  background-image:
+    radial-gradient(rgba(20, 18, 16, 0.14) 0.5px, transparent 0.6px),
+    radial-gradient(rgba(230, 57, 70, 0.07) 0.5px, transparent 0.6px);
+  background-size:
+    3px 3px,
+    7px 7px;
+  background-position:
+    0 0,
+    2px 1px;
+}
+.ink-stroke {
+  -webkit-text-stroke: 2px #141210;
+  paint-order: stroke fill;
+}
+.ink-stroke-thin {
+  -webkit-text-stroke: 1px #141210;
+  paint-order: stroke fill;
+}
+.bubble-tail::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 34px;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 20px solid #141210;
+}
+.bubble-tail::before {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 37px;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 15px solid #fffdf6;
+}
+.focus-ink:focus-visible {
+  outline: 3px solid #2f6690;
+  outline-offset: 3px;
+}
+
+/* ---------- Edo ---------- */
+.washi-grain {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(28, 26, 23, 0.035) 0 1px,
+      transparent 1px 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(28, 26, 23, 0.028) 0 1px,
+      transparent 1px 6px
+    ),
+    radial-gradient(rgba(120, 100, 70, 0.08) 0.7px, transparent 0.8px);
+  background-size:
+    4px 4px,
+    6px 6px,
+    9px 9px;
+}
+.vertical-jp {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.18em;
+}
+.seal-stamp {
+  box-shadow: inset 0 0 0 2px rgba(242, 236, 224, 0.75);
+}
+.focus-sumi:focus-visible {
+  outline: 2px solid #c1332a;
+  outline-offset: 4px;
+}
+.edo-scroll {
+  scrollbar-width: none;
+}
+.edo-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hide-native-cursor,
+  .hide-native-cursor * {
+    cursor: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
