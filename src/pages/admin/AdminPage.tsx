@@ -10,7 +10,7 @@ import { useAuthStore } from "../../store/authStore";
 import { useAdminLoginMutation } from "../../hooks/useProjectsQuery";
 
 export function AdminPage() {
-  const { projects, saveProject, deleteProject, resetProjects } = useProjects();
+  const { projects, isLoading, saveProject, deleteProject, resetProjects } = useProjects();
   const { isAuthenticated, email, clearAuth } = useAuthStore();
   const loginMutation = useAdminLoginMutation();
 
@@ -175,6 +175,7 @@ export function AdminPage() {
               selectedId={selected ? selected.id : "new"}
               onSelect={setSelectedId}
               onNew={() => setSelectedId("new")}
+              isLoading={isLoading}
             />
           </div>
         </aside>

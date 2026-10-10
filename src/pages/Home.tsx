@@ -7,7 +7,7 @@ import { Hero } from '../components/Hero';
 import { Manifesto } from '../components/Manifesto';
 import { StoryChapters } from '../components/StoryChapters';
 import { ProjectsSection } from '../components/work/ProjectsSection';
-import { ThoughtsSection } from '../components/thoughts/ThoughtsSection';
+// import { ThoughtsSection } from '../components/thoughts/ThoughtsSection';
 import { StackExplorer } from '../components/StackExplorer';
 import { Experience } from '../components/Experience';
 import { Contact } from '../components/Contact';

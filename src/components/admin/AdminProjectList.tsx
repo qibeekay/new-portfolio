@@ -8,9 +8,10 @@ interface AdminProjectListProps {
   selectedId: string;
   onSelect: (id: string) => void;
   onNew: () => void;
+  isLoading?: boolean;
 }
 
-export function AdminProjectList({ projects, selectedId, onSelect, onNew }: AdminProjectListProps) {
+export function AdminProjectList({ projects, selectedId, onSelect, onNew, isLoading }: AdminProjectListProps) {
   const [query, setQuery] = useState('');
   const q = query.trim().toLowerCase();
   const filtered = q ?
@@ -23,7 +24,7 @@ export function AdminProjectList({ projects, selectedId, onSelect, onNew }: Admi
       <div className="flex items-baseline justify-between">
         <h2 className="font-display text-3xl">Projects</h2>
         <span className="font-mono text-xs text-paper/45">
-          {projects.length} total · {ongoing} ongoing
+          {isLoading ? 'Syncing…' : `${projects.length} total · ${ongoing} ongoing`}
         </span>
       </div>
 
@@ -50,7 +51,18 @@ export function AdminProjectList({ projects, selectedId, onSelect, onNew }: Admi
       </label>
 
       <ul className="mt-4 space-y-1">
-        {filtered.map((p) => {
+        {isLoading ? (
+          [1, 2, 3].map((i) => (
+            <li key={i} className="flex animate-pulse items-center gap-3 rounded-xl px-2.5 py-2">
+              <div className="size-11 shrink-0 rounded-lg bg-paper/10" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 w-3/4 rounded bg-paper/15" />
+                <div className="h-3 w-1/2 rounded bg-paper/10" />
+              </div>
+            </li>
+          ))
+        ) : (
+          filtered.map((p) => {
           const active = p.id === selectedId;
           return (
             <li key={p.id}>
@@ -74,8 +86,8 @@ export function AdminProjectList({ projects, selectedId, onSelect, onNew }: Admi
               </button>
             </li>);
 
-        })}
-        {filtered.length === 0 && <li className="px-2 py-6 text-sm text-paper/45">No projects match “{query}”.</li>}
+          }))}
+        {!isLoading && filtered.length === 0 && <li className="px-2 py-6 text-sm text-paper/45">No projects match “{query}”.</li>}
       </ul>
     </div>);
 

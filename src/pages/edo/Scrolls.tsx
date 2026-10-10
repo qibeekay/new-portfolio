@@ -21,7 +21,7 @@ const SEAL: Record<ProjectStatus, {kanji: string;label: string;color: string;}> 
 
 /** Works as three scrolls; each opens as a folding screen whose leaves open in place, byōbu style. */
 export function Scrolls() {
-  const { projects } = useProjects();
+  const { projects, isLoading } = useProjects();
   const [category, setCategory] = useState<ProjectCategory>('creative');
   const leaves = projects.filter((project) => project.category === category);
   const [openId, setOpenId] = useState<string | null>(null);
@@ -31,7 +31,9 @@ export function Scrolls() {
     <div className="flex min-h-full flex-col justify-center py-2">
       <p className="font-edo text-[11px] tracking-[0.42em] text-edo-vermilion">巻 · THE SCROLLS</p>
       <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-        <h3 className="font-edo text-3xl font-semibold text-sumi">{projects.length} works, in three scrolls</h3>
+        <h3 className="font-edo text-3xl font-semibold text-sumi">
+          {isLoading ? 'Loading scrolls…' : `${projects.length} works, in three scrolls`}
+        </h3>
         <div role="tablist" aria-label="Scroll" className="flex border border-sumi/40">
           {CATEGORIES.map((option) => {
             const active = option.id === category;
@@ -59,7 +61,27 @@ export function Scrolls() {
       <p className="mt-2 font-edo text-sm text-sumi-wash">{CATEGORIES.find((c) => c.id === category)?.blurb}</p>
 
       <div className="mt-6 flex flex-col gap-3 lg:flex-row lg:gap-0">
-        {leaves.map((project) => {
+        {isLoading ? (
+          [1, 2, 3].map((n) => (
+            <div
+              key={n}
+              className="relative flex min-h-[160px] min-w-0 flex-1 animate-pulse flex-col border border-sumi/30 bg-washi-light/50 p-4 lg:border-l-0 lg:first:border-l"
+            >
+              <div className="flex items-center justify-between border-b border-sumi/20 pb-3">
+                <div className="space-y-1.5">
+                  <div className="h-3 w-12 rounded bg-sumi/15" />
+                  <div className="h-5 w-28 rounded bg-sumi/20" />
+                </div>
+                <div className="size-7 rounded bg-sumi/20" />
+              </div>
+              <div className="mt-4 space-y-2">
+                <div className="h-4 w-3/4 rounded bg-sumi/15" />
+                <div className="h-3 w-full rounded bg-sumi/10" />
+              </div>
+            </div>
+          ))
+        ) : (
+          leaves.map((project) => {
           const open = project.id === openLeaf?.id;
           const seal = SEAL[project.status];
           return (
@@ -152,7 +174,7 @@ export function Scrolls() {
               null}
             </motion.article>);
 
-        })}
+          }))}
       </div>
     </div>);
 

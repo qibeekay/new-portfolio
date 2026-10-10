@@ -36,7 +36,7 @@ function timeFor(index: number) {
 }
 
 export function ProjectsChannel() {
-  const { projects } = useProjects();
+  const { projects, isLoading } = useProjects();
   const groups = CATEGORIES.map((category) => ({
     ...category,
     items: projects.filter((project) => project.category === category.id)
@@ -47,12 +47,38 @@ export function ProjectsChannel() {
     <>
       <Message time="8:30 am" pinned reactions={[{ emoji: '📌', count: 5 }]}>
         <p>
-          {projects.length} projects, posted in three threads — creative, functional and systems. Finished, in flight,
-          and still on the whiteboard; each card says which.
+          {isLoading
+            ? 'Syncing live projects from API...'
+            : `${projects.length} projects, posted in three threads — creative, functional and systems. Finished, in flight, and still on the whiteboard; each card says which.`}
         </p>
       </Message>
 
-      {groups.map((group) =>
+      {isLoading ? (
+        <div className="space-y-6 px-4 py-6 sm:px-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="flex animate-pulse items-start gap-4">
+              <div className="size-10 shrink-0 rounded-lg bg-work-line" />
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className="h-4 w-32 rounded bg-work-line" />
+                  <div className="h-3 w-16 rounded bg-work-line/60" />
+                </div>
+                <div className="h-4 w-2/3 rounded bg-work-line/70" />
+                <div className="max-w-xl space-y-3 rounded-lg border border-work-line bg-white p-4">
+                  <div className="h-5 w-40 rounded bg-work-line" />
+                  <div className="h-36 w-full rounded-md bg-work-line/40" />
+                  <div className="h-4 w-5/6 rounded bg-work-line/70" />
+                  <div className="flex gap-2">
+                    <div className="h-3 w-16 rounded bg-work-line/50" />
+                    <div className="h-3 w-16 rounded bg-work-line/50" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        groups.map((group) => (
       <div key={group.id}>
           <p className="relative px-4 py-3 text-center sm:px-6">
             <span className="absolute left-4 right-4 top-1/2 h-px bg-work-line sm:left-6 sm:right-6" aria-hidden="true" />
@@ -144,7 +170,7 @@ export function ProjectsChannel() {
 
         })}
         </div>
-      )}
+      )))}
     </>);
 
 }

@@ -31,7 +31,7 @@ const STAMP: Record<ProjectStatus, {label: string;className: string;}> = {
 type Beat = 'all' | ProjectCategory;
 
 export function CaseFiles() {
-  const { projects } = useProjects();
+  const { projects, isLoading } = useProjects();
   const [beat, setBeat] = useState<Beat>('all');
   const filtered = beat === 'all' ? projects : projects.filter((project) => project.category === beat);
   const [openId, setOpenId] = useState<string | null>(projects[0]?.id ?? null);
@@ -71,59 +71,90 @@ export function CaseFiles() {
             </motion.button>);
 
         })}
-      </div>
-
-      <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        <ul className="space-y-3 lg:max-h-[calc(100vh-220px)] lg:overflow-y-auto lg:pb-3 lg:pl-1 lg:pr-4 lg:pt-1">
-          <AnimatePresence initial={false} mode="popLayout">
-            {filtered.map((project) => {
-              const selected = project.id === active?.id;
-              const spot = INK[categorySpot[project.category]];
-              return (
-                <motion.li
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -12 }}
-                  transition={{ duration: 0.2, ease: EASE }}>
-                  
-                  <button
-                    type="button"
-                    onClick={() => setOpenId(project.id)}
-                    aria-pressed={selected}
-                    className="focus-ink block w-full text-left">
+      </div>      <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        {isLoading ? (
+          <div className="space-y-3">
+            {[1, 2, 3, 4].map((n) => (
+              <div
+                key={n}
+                className="flex animate-pulse items-center gap-4 border-[3px] border-ink bg-[#fffdf6] px-4 py-4 shadow-panel-sm"
+              >
+                <div className="h-3 w-8 rounded bg-ink/25" />
+                <div className="min-w-0 flex-1 space-y-2">
+                  <div className="h-6 w-3/4 rounded bg-ink/20" />
+                  <div className="h-3 w-1/2 rounded bg-ink/10" />
+                </div>
+                <div className="h-4 w-14 rounded bg-ink/15" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <ul className="space-y-3 lg:max-h-[calc(100vh-220px)] lg:overflow-y-auto lg:pb-3 lg:pl-1 lg:pr-4 lg:pt-1">
+            <AnimatePresence initial={false} mode="popLayout">
+              {filtered.map((project) => {
+                const selected = project.id === active?.id;
+                const spot = INK[categorySpot[project.category]];
+                return (
+                  <motion.li
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -12 }}
+                    transition={{ duration: 0.2, ease: EASE }}>
                     
-                    <motion.span
-                      className="flex items-center gap-4 border-[3px] border-ink px-4 py-3"
-                      animate={{
-                        x: selected ? 8 : 0,
-                        backgroundColor: selected ? spot : '#fffdf6',
-                        color: selected ? '#fffdf6' : '#141210',
-                        boxShadow: selected ? '6px 6px 0 0 #141210' : '3px 3px 0 0 #141210'
-                      }}
-                      whileHover={{ x: 8 }}
-                      transition={{ duration: 0.16, ease: EASE }}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenId(project.id)}
+                      aria-pressed={selected}
+                      className="focus-ink block w-full text-left">
                       
-                      <span className="font-caption text-[11px] opacity-75">{project.year}</span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate font-display text-2xl uppercase leading-none tracking-wide">
-                          {project.title}
+                      <motion.span
+                        className="flex items-center gap-4 border-[3px] border-ink px-4 py-3"
+                        animate={{
+                          x: selected ? 8 : 0,
+                          backgroundColor: selected ? spot : '#fffdf6',
+                          color: selected ? '#fffdf6' : '#141210',
+                          boxShadow: selected ? '6px 6px 0 0 #141210' : '3px 3px 0 0 #141210'
+                        }}
+                        whileHover={{ x: 8 }}
+                        transition={{ duration: 0.16, ease: EASE }}>
+                        
+                        <span className="font-caption text-[11px] opacity-75">{project.year}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-display text-2xl uppercase leading-none tracking-wide">
+                            {project.title}
+                          </span>
+                          <span className="mt-1 block truncate font-body text-xs opacity-80">{project.tagline}</span>
                         </span>
-                        <span className="mt-1 block truncate font-body text-xs opacity-80">{project.tagline}</span>
-                      </span>
-                      <span className="shrink-0 font-caption text-[10px] uppercase tracking-[0.14em] opacity-75">
-                        {categoryLabel(project.category)}
-                      </span>
-                    </motion.span>
-                  </button>
-                </motion.li>);
+                        <span className="shrink-0 font-caption text-[10px] uppercase tracking-[0.14em] opacity-75">
+                          {categoryLabel(project.category)}
+                        </span>
+                      </motion.span>
+                    </button>
+                  </motion.li>);
 
-            })}
-          </AnimatePresence>
-        </ul>
+              })}
+            </AnimatePresence>
+          </ul>
+        )}
 
-        {active ?
+        {isLoading ? (
+          <Panel className="animate-pulse p-6 sm:p-8">
+            <div className="mb-6 aspect-[16/9] w-full rounded border-[3px] border-ink bg-ink/15" />
+            <div className="h-4 w-1/3 rounded bg-ink/20" />
+            <div className="mt-3 h-10 w-2/3 rounded bg-ink/25" />
+            <div className="mt-3 h-5 w-1/2 rounded bg-ink/15" />
+            <div className="mt-4 space-y-2">
+              <div className="h-4 w-full rounded bg-ink/10" />
+              <div className="h-4 w-4/5 rounded bg-ink/10" />
+            </div>
+            <div className="mt-6 flex gap-3">
+              <div className="h-10 w-28 rounded border-[3px] border-ink bg-ink/20" />
+              <div className="h-10 w-28 rounded border-[3px] border-ink bg-ink/10" />
+            </div>
+          </Panel>
+        ) : active ? (
         <motion.div
           key={active.id}
           initial={{ opacity: 0, y: 16 }}
@@ -212,12 +243,13 @@ export function CaseFiles() {
                 </div>
               </div>
             </Panel>
-          </motion.div> :
+          </motion.div>
+        ) : (
 
         <Panel className="p-8">
             <p className="font-display text-3xl uppercase tracking-wide">No cases on this beat — yet.</p>
           </Panel>
-        }
+        )}
       </div>
 
       <IssueFooterNav currentSlug={issue.slug} />
