@@ -9,7 +9,6 @@ import {
 } from '../hooks/useProjectsQuery';
 import { defaultTestProject } from '../data/projects';
 import { useAuthStore } from './authStore';
-import { adminLoginApi } from '../api/projects';
 
 export interface ProjectsContextValue {
   projects: Project[];
@@ -33,25 +32,16 @@ export function ProjectsProvider({ children }: { children: React.ReactNode }) {
   // Directly consume live data from the backend endpoint
   const projects = useMemo(() => apiProjects ?? [], [apiProjects]);
 
-  // If the backend has 0 projects, create an initial test project via the endpoint
+  // If the backend has 0 projects and admin is logged in, optionally create an initial project
   useEffect(() => {
     if (!isLoading && apiProjects && apiProjects.length === 0 && !autoCreatedRef.current) {
       autoCreatedRef.current = true;
-      (async () => {
-        try {
-          let token = useAuthStore.getState().token;
-          if (!token) {
-            const login = await adminLoginApi({
-              email: 'admin@example.com',
-              password: 'admin123',
-            });
-            useAuthStore.getState().setAuth(login.token, login.expiresAt, 'admin@example.com');
-          }
-          await createMutation.mutateAsync(defaultTestProject);
-        } catch (err) {
+      const token = useAuthStore.getState().token;
+      if (token) {
+        createMutation.mutateAsync(defaultTestProject).catch((err) => {
           console.error('Failed to create initial test project:', err);
-        }
-      })();
+        });
+      }
     }
   }, [isLoading, apiProjects, createMutation]);
 
@@ -103,13 +93,9 @@ export function ProjectsProvider({ children }: { children: React.ReactNode }) {
 
   const resetProjects = useCallback(async () => {
     try {
-      let token = useAuthStore.getState().token;
+      const token = useAuthStore.getState().token;
       if (!token) {
-        const login = await adminLoginApi({
-          email: 'admin@example.com',
-          password: 'admin123',
-        });
-        useAuthStore.getState().setAuth(login.token, login.expiresAt, 'admin@example.com');
+        throw new Error('Authentication required to reset projects');
       }
 
       // Delete all current projects on the backend

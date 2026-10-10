@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "sonner";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -19,6 +19,7 @@ import { MorphOverlay } from "./components/MorphOverlay";
 import { ThemeNudge } from "./components/ThemeNudge";
 import { ThemeDock } from "./components/ThemeDock";
 import { AdminPage } from "./pages/admin/AdminPage";
+import { AdminLoginPage } from "./pages/admin/AdminLoginPage";
 
 interface AppProps {
   accent?: "ember" | "lime" | "ice";
@@ -91,7 +92,9 @@ export function App({ accent = "ember", showLoader = true }: AppProps) {
         <ProjectsProvider>
           <BrowserRouter>
           <Routes>
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin-path/login" element={<AdminLoginPage />} />
+            <Route path="/admin-path/admin" element={<AdminPage />} />
+            <Route path="/admin-path" element={<Navigate to="/admin-path/admin" replace />} />
             <Route
               path="/*"
               element={

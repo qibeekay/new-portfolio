@@ -42,7 +42,7 @@ export const useAuthStore = create<AuthState>((set) => {
   return {
     ...initial,
     setAuth: (token: string, expiresAt: string, email?: string) => {
-      const authData = { token, expiresAt, email: email ?? 'admin@example.com' };
+      const authData = { token, expiresAt, email: email ?? null };
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(authData));
       } catch {
@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthState>((set) => {
       set({
         token,
         expiresAt,
-        email: email ?? 'admin@example.com',
+        email: email ?? null,
         isAuthenticated: true,
       });
     },
