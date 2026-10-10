@@ -6,9 +6,12 @@ import {
   LinkIcon,
   LoaderIcon,
   MailIcon,
+  MessageSquareIcon,
+  PhoneIcon,
 } from "lucide-react";
 import { Message } from "../../components/workspace/Message";
 import { AttachmentCard } from "../../components/workspace/AttachmentCard";
+import { profile } from "../../data/profile";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -40,13 +43,19 @@ export function ContactChannel() {
         </p>
         <div className="flex flex-wrap gap-2">
           {[
-            { label: "alex@qibeekay.dev", icon: MailIcon },
-            { label: "github.com/qibeekay", icon: GiftIcon },
-            { label: "linkedin.com/in/qibeekay", icon: LinkIcon },
+            { label: profile.email, icon: MailIcon, href: `mailto:${profile.email}`, external: false },
+            { label: `WhatsApp: ${profile.whatsapp}`, icon: MessageSquareIcon, href: profile.whatsappHref, external: true },
+            { label: `Call: ${profile.phone}`, icon: PhoneIcon, href: profile.phoneHref, external: false },
+            { label: "github.com/qibeekay", icon: GiftIcon, href: "https://github.com/qibeekay", external: true },
+            { label: "linkedin.com/in/anugomokwe", icon: LinkIcon, href: "https://www.linkedin.com/in/anugomokwe/", external: true },
+            { label: "x.com/qibeekay", icon: LinkIcon, href: "https://x.com/qibeekay", external: true },
+            { label: "instagram.com/qi_beekay", icon: LinkIcon, href: "https://www.instagram.com/qi_beekay/", external: true },
           ].map((link) => (
             <a
               key={link.label}
-              href="#"
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noreferrer" : undefined}
               className="inline-flex items-center gap-1.5 rounded-md border border-work-line px-2.5 py-1.5 text-[13px] font-semibold text-work-blue hover:bg-work-blue/5"
             >
               <link.icon className="h-3.5 w-3.5" aria-hidden="true" />

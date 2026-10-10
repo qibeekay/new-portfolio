@@ -1,6 +1,9 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { Toaster } from "sonner";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
 import {
   ThemeProvider,
   useTheme,
@@ -15,6 +18,7 @@ import { EdoShell } from "./components/edo/EdoShell";
 import { MorphOverlay } from "./components/MorphOverlay";
 import { ThemeNudge } from "./components/ThemeNudge";
 import { ThemeDock } from "./components/ThemeDock";
+import { AdminPage } from "./pages/admin/AdminPage";
 
 interface AppProps {
   accent?: "ember" | "lime" | "ice";
@@ -79,17 +83,38 @@ export function App({ accent = "ember", showLoader = true }: AppProps) {
   const accentRgb = ACCENTS[accent];
 
   return (
-    <div
-      className="min-h-screen w-full"
-      style={{ "--accent": accentRgb } as React.CSSProperties}
-    >
-      <ProjectsProvider>
-        <BrowserRouter>
-          <ThemeProvider>
-            <ThemedSite accentRgb={accentRgb} showLoader={showLoader} />
-          </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <div
+        className="min-h-screen w-full"
+        style={{ "--accent": accentRgb } as React.CSSProperties}
+      >
+        <ProjectsProvider>
+          <BrowserRouter>
+          <Routes>
+            <Route path="/admin" element={<AdminPage />} />
+            <Route
+              path="/*"
+              element={
+                <ThemeProvider>
+                  <ThemedSite accentRgb={accentRgb} showLoader={showLoader} />
+                </ThemeProvider>
+              }
+            />
+          </Routes>
+          <Toaster
+            theme="dark"
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "#0c0d10",
+                borderColor: "rgba(242, 239, 230, 0.12)",
+                color: "#f2efe6",
+              },
+            }}
+          />
         </BrowserRouter>
       </ProjectsProvider>
     </div>
-  );
+  </QueryClientProvider>
+);
 }

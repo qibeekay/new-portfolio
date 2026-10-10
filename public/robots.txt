@@ -1,0 +1,47 @@
+# Robots.txt for Anugo Mokwe (qibeekay) Portfolio
+# Live Domain: https://qibeekay.vercel.app/
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+
+# AI Search and Answer Engines (AEO)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+
+# Sitemap
+Sitemap: https://qibeekay.vercel.app/sitemap.xml

@@ -46,7 +46,7 @@ export function Home({ accentRgb, showLoader }: HomeProps) {
         <Manifesto />
         <StoryChapters />
         <ProjectsSection />
-        <ThoughtsSection />
+        {/* <ThoughtsSection /> */}
         <StackExplorer />
         <Experience />
         <Contact />

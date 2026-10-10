@@ -1,0 +1,49 @@
+# Anugo Mokwe (Chibuike Mokwe / qibeekay)
+
+> Creative Frontend Engineer & Full Stack Developer building immersive, high-performance web experiences and software systems.
+
+- **Full Name**: Anugo Mokwe
+- **Alternate / Legal Name**: Chibuike Mokwe (Anugo Chibuike Mokwe)
+- **Online Handle**: qibeekay (Qi Beekay)
+- **Portfolio**: https://qibeekay.vercel.app/
+- **Location**: Nigeria (Remote available globally)
+- **Email**: mokwechibuike7@gmail.com
+- **Phone**: +234 915 042 7993
+- **WhatsApp**: +234 907 321 6155
+
+## Online Profiles & Social Links
+- **GitHub**: https://github.com/qibeekay
+- **LinkedIn**: https://www.linkedin.com/in/anugomokwe/
+- **X (Twitter)**: https://x.com/qibeekay
+- **Instagram**: https://www.instagram.com/qi_beekay/
+
+## Professional Summary
+Anugo Mokwe (also known as Chibuike Mokwe and known widely by his moniker **qibeekay**) is a Creative Frontend Engineer and Full Stack Developer. He combines deep technical mastery in JavaScript, TypeScript, React, Next.js, and Golang with high-end creative design aesthetics (Three.js, WebGL, Framer Motion, GSAP, Tailwind CSS).
+
+He has engineered customer-facing web platforms, e-commerce solutions, email marketing software, real-time messaging applications, and compliance systems.
+
+## Core Technical Skills
+- **Frontend**: React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Material Tailwind
+- **Creative & Motion**: Three.js, WebGL, Framer Motion, GSAP, Canvas, Micro-interactions, Design Systems
+- **State Management & Data**: TanStack Query, Zustand, Axios, Context API
+- **Backend & APIs**: Go (Golang), Node.js, Express, RESTful APIs, Swagger/OpenAPI, Authentication (JWT, Bearer)
+- **Databases & Cloud**: PostgreSQL, Cloudinary, Git, GitHub, Vercel, Render
+
+## Professional Experience
+- **Circle HQ** (Jul 2026 — Oct 2026): Frontend Engineer (Contract)
+  - Engineered core web application interfaces with pixel-perfect responsive layouts.
+  - Optimized client-side bundle performance and delivered production-ready modules.
+- **FireSwitch Technologies Ltd** (Jan 2024 — Present): Full Stack Developer
+  - Led frontend developers for email marketing platform, event platforms, and real-time chat interfaces.
+  - Mentored interns and resolved complex UI/UX and performance bottlenecks.
+- **Vegeel Technology Limited** (Jul 2024 — Aug 2024): Frontend Developer Intern
+  - Developed task management, policy center, and customer onboarding modules for 5,000+ users.
+- **FireSwitch Technologies Ltd** (Jan 2022 — Dec 2023): Frontend Developer Intern
+  - Built solar-focused e-commerce platform and blogging systems with secure payment gateway integrations.
+
+## Themes & Portfolio Showcase
+The portfolio at https://qibeekay.vercel.app/ features four distinct theme engines:
+1. **Studio Theme**: Cinematic, typography-driven dark mode aesthetic with custom cursor and physics interactions.
+2. **Workspace Theme**: IDE-inspired development environment layout with live channel explorer.
+3. **Comic Theme**: Pop-art comic book aesthetic with halftone textures and dynamic panels.
+4. **Edo Theme**: Elegant Japanese minimalist ink-wash design with calligraphy aesthetics.

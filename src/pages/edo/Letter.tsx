@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { GiftIcon, LinkIcon } from "lucide-react";
+import { GiftIcon, LinkIcon, MailIcon, MessageSquareIcon, PhoneIcon } from "lucide-react";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -156,16 +156,19 @@ export function Letter() {
           </p>
           <ul className="mt-6 space-y-4">
             {[
-              { label: "GitHub", handle: "@qibeekay", icon: GiftIcon },
-              {
-                label: "LinkedIn",
-                handle: "/in/qibeekay",
-                icon: LinkIcon,
-              },
+              { label: "Email", handle: "mokwechibuike7@gmail.com", href: "mailto:mokwechibuike7@gmail.com", icon: MailIcon, external: false },
+              { label: "WhatsApp", handle: "09073216155", href: "https://wa.me/2349073216155", icon: MessageSquareIcon, external: true },
+              { label: "Call", handle: "09150427993", href: "tel:+2349150427993", icon: PhoneIcon, external: false },
+              { label: "GitHub", handle: "@qibeekay", href: "https://github.com/qibeekay", icon: GiftIcon, external: true },
+              { label: "LinkedIn", handle: "/in/anugomokwe", href: "https://www.linkedin.com/in/anugomokwe/", icon: LinkIcon, external: true },
+              { label: "X", handle: "@qibeekay", href: "https://x.com/qibeekay", icon: LinkIcon, external: true },
+              { label: "Instagram", handle: "@qi_beekay", href: "https://www.instagram.com/qi_beekay/", icon: LinkIcon, external: true },
             ].map((link) => (
               <li key={link.label}>
                 <a
-                  href="#"
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
                   className="focus-sumi group flex items-center gap-3 border-b border-sumi/25 pb-3 text-sumi transition-colors duration-200 ease-pulp hover:text-edo-vermilion"
                 >
                   <link.icon className="h-4 w-4" aria-hidden="true" />

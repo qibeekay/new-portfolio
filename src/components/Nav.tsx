@@ -7,11 +7,12 @@ import { lockScroll } from '../utils/smoothScroll';
 import { EASE_OUT } from '../utils/motion';
 
 const LINKS = [
-{ id: 'story', label: 'Story' },
-{ id: 'work', label: 'Work' },
-{ id: 'thoughts', label: 'Thoughts' },
-{ id: 'toolkit', label: 'Toolkit' },
-{ id: 'experience', label: 'Experience' }];
+  { id: 'story', label: 'Story' },
+  { id: 'work', label: 'Work' },
+  // { id: 'thoughts', label: 'Thoughts' },
+  { id: 'toolkit', label: 'Toolkit' },
+  { id: 'experience', label: 'Experience' },
+];
 
 
 export function Nav({ ready }: {ready: boolean;}) {

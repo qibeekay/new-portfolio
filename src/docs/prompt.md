@@ -2686,7 +2686,7 @@ export function Experience() {
 
         label="Experience"
 
-        title={['Ten years of', { text: 'shipping.', className: 'italic text-paper/60' }]}
+        title={['Five years of', { text: 'shipping.', className: 'italic text-paper/60' }]}
 
         description="Studios, startups and a stretch on my own. Open a role for what I actually did there."
 
