@@ -42,7 +42,7 @@ export const channels: Channel[] = [
     id: "experience",
     name: "experience",
     path: "/chronicles",
-    topic: "Nine years, four teams",
+    topic: "Five years, four teams",
     members: 96,
   },
   {

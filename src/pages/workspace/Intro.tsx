@@ -28,7 +28,7 @@ export function Intro() {
       >
         <p>
           Hi — I’m <span className="font-semibold">{workspaceMeta.person}</span>
-          , a software engineer of nine years. I build realtime systems,
+          , a software engineer of Five years. I build realtime systems,
           collaborative editors, and interfaces that keep their composure when
           everything around them is on fire.
         </p>
@@ -63,7 +63,7 @@ export function Intro() {
             {
               to: "/chronicles",
               channel: "experience",
-              note: "nine years, four teams",
+              note: "Five years, four teams",
             },
             {
               to: "/signal",

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useProjects } from '../../contexts/ProjectsContext';
 import { CATEGORIES } from '../../utils/projectMeta';
+import { optimizeImageUrl } from '../../utils/image';
 import type { ProjectCategory, ProjectStatus } from '../../types/portfolio';
 
 const EASE: [number, number, number, number] = [0.23, 1, 0.32, 1];
@@ -121,12 +122,14 @@ export function Scrolls() {
                 
                   <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
                     {project.image ?
-                  <img
-                    src={project.image}
-                    alt={project.imageAlt ?? ''}
-                    className="h-36 w-full border border-sumi/30 object-cover sepia-[0.35] xl:h-full" /> :
-
-                  null}
+                      <img
+                        src={optimizeImageUrl(project.image, { width: 700 })}
+                        alt={project.imageAlt ?? project.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-36 w-full border border-sumi/30 object-cover sepia-[0.35] xl:h-full"
+                      /> :
+                      null}
                     <div className={project.image ? '' : 'xl:col-span-2'}>
                       <h4 className="font-edo text-xl font-semibold leading-snug text-sumi">{project.tagline}</h4>
                       <p className="mt-2 font-edo text-[14px] leading-loose text-sumi-soft">{project.description}</p>

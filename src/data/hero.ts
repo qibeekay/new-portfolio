@@ -1,8 +1,7 @@
 export const heroArt = {
-  civilian: "/hero-comic.jpg",
-  hero: "/hero-cape.jpg",
-  edoPortrait: "/edo.jpg",
-  edoScenery: "/077fb563-5a93-45b4-b184-5c9c15184479.jpg",
+  civilian: "/hero-comic.webp",
+  hero: "/hero-cape.webp",
+  edoPortrait: "/edo.webp",
 };
 
 export interface RevealZone {

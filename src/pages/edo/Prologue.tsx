@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { heroArt } from "../../data/hero";
 
 const marks = [
-  { label: "歳月", value: "九年", note: "Nine years of service" },
+  { label: "歳月", value: "九年", note: "Five years of service" },
   { label: "任", value: "筆頭工", note: "Staff engineer, Northwind" },
   { label: "居", value: "里斯本", note: "Ibadan· CET" },
 ];
@@ -23,7 +23,7 @@ export function Prologue() {
         </p>
         <div className="mt-5 h-px w-24 bg-sumi/40" aria-hidden="true" />
         <p className="mt-5 font-edo text-lg leading-loose text-sumi-soft">
-          A software engineer of nine years. Realtime systems, collaborative
+          A software engineer of Five years. Realtime systems, collaborative
           editors, and interfaces that keep their composure when everything
           around them is on fire.
         </p>
@@ -61,6 +61,8 @@ export function Prologue() {
           <img
             src={heroArt.edoPortrait}
             alt="Woodblock-print portrait of Anugo Mokwe as an Edo-period craftsman at a writing desk"
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </div>

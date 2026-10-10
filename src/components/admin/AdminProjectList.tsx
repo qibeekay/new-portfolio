@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PlusIcon, SearchIcon } from 'lucide-react';
 import type { Project } from '../../types/portfolio';
 import { categoryLabel, statusLabel } from '../../utils/projectMeta';
+import { optimizeImageUrl } from '../../utils/image';
 
 interface AdminProjectListProps {
   projects: Project[];
@@ -75,7 +76,17 @@ export function AdminProjectList({ projects, selectedId, onSelect, onNew, isLoad
                 }>
                 
                 <span className="relative grid size-11 shrink-0 place-items-center overflow-hidden rounded-lg border border-paper/10 bg-surface font-display text-xl italic text-accent">
-                  {p.image ? <img src={p.image} alt="" className="h-full w-full object-cover" /> : p.title.charAt(0)}
+                  {p.image ? (
+                    <img
+                      src={optimizeImageUrl(p.image, { width: 120, height: 120, crop: 'fill' })}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    p.title.charAt(0)
+                  )}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm">{p.title}</span>

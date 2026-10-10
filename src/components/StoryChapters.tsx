@@ -44,6 +44,8 @@ export function StoryChapters() {
             <motion.img
               src={profile.portrait}
               alt={profile.portraitAlt}
+              loading="lazy"
+              decoding="async"
               style={{ scale: imageScale, y: imageY }}
               className="h-[30svh] w-full object-cover lg:aspect-[4/5] lg:h-auto lg:max-h-[74svh]" />
             

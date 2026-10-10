@@ -9,6 +9,7 @@ import { issues } from '../data/issues';
 import { useProjects } from '../contexts/ProjectsContext';
 import { CATEGORIES, categoryLabel } from '../utils/projectMeta';
 import { categorySpot } from '../utils/themeColors';
+import { optimizeImageUrl } from '../utils/image';
 import type { ProjectCategory, ProjectStatus, SpotColor } from '../types/portfolio';
 
 const issue = issues[3];
@@ -163,11 +164,17 @@ export function CaseFiles() {
           
             <Panel as="article" color={categorySpot[active.category]} className="p-6 sm:p-8">
               {active.image ?
-            <figure className="relative mb-6 aspect-[16/9] overflow-hidden border-[3px] border-ink bg-ink">
-                  <img src={active.image} alt={active.imageAlt ?? ''} className="h-full w-full object-cover" />
+                <figure className="relative mb-6 aspect-[16/9] overflow-hidden border-[3px] border-ink bg-ink">
+                  <img
+                    src={optimizeImageUrl(active.image, { width: 900 })}
+                    alt={active.imageAlt ?? active.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
                   <span className="paper-grain pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
                 </figure> :
-            null}
+                null}
 
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="font-caption text-[11px] uppercase tracking-[0.24em] text-ink-soft">

@@ -42,7 +42,7 @@ export function Cover() {
           </motion.h1>
 
           <p className="mt-4 max-w-2xl font-body text-xl font-bold leading-snug sm:text-2xl">
-            Staff software engineer. Nine years of shipping realtime systems,
+            Staff software engineer. Five years of shipping realtime systems,
             collaborative editors and interfaces that hold up when everything
             else is on fire.
           </p>

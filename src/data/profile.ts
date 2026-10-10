@@ -17,7 +17,7 @@ export const profile = {
   whatsappHref: "https://wa.me/2349073216155",
   availability:
     "Taking on select freelance work and open to full-time roles.",
-  portrait: "/hero.jpg",
+  portrait: "/hero.webp",
   portraitAlt:
     "Anugo Mokwe at his desk in a dim studio, lit by the warm glow of a code editor",
   socials: [

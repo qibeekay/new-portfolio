@@ -76,6 +76,8 @@ export function HeroReveal() {
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover"
           draggable={false}
+          loading="eager"
+          decoding="async"
         />
 
         {/* Civilian plate on top, with a hole punched at the pointer */}
@@ -84,6 +86,8 @@ export function HeroReveal() {
           alt="Comic-book illustration of Anugo Mokwe on a rooftop above the city; hovering reveals the costumed identity beneath"
           className="absolute inset-0 h-full w-full object-cover"
           draggable={false}
+          loading="eager"
+          decoding="async"
           style={{ WebkitMaskImage: civilianMask, maskImage: civilianMask }}
         />
 
