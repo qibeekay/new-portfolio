@@ -5,7 +5,6 @@ import { AttachmentCard } from '../../components/workspace/AttachmentCard';
 import { useProjects } from '../../contexts/ProjectsContext';
 import { CATEGORIES, statusLabel } from '../../utils/projectMeta';
 import { categorySpot } from '../../utils/themeColors';
-import { optimizeImageUrl } from '../../utils/image';
 import type { ProjectStatus, SpotColor } from '../../types/portfolio';
 
 const ACCENT: Record<SpotColor, string> = {
@@ -114,7 +113,7 @@ export function ProjectsChannel() {
 
                   {project.image ?
                     <img
-                      src={optimizeImageUrl(project.image, { width: 800 })}
+                      src={project.image}
                       alt={project.imageAlt ?? project.title}
                       loading="lazy"
                       decoding="async"

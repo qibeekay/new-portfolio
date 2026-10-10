@@ -3,7 +3,6 @@ import { AsteriskIcon, SquareStackIcon } from 'lucide-react';
 import type { Project } from '../../types/portfolio';
 import { TerminalVisual } from './TerminalVisual';
 import { terminalLinesFor } from '../../utils/projectMeta';
-import { optimizeImageUrl, getOptimizedSrcSet } from '../../utils/image';
 
 interface ProjectCoverProps {
   project: Project;
@@ -14,20 +13,10 @@ export function ProjectCover({ project, variant = 'card' }: ProjectCoverProps) {
   const [loaded, setLoaded] = useState(false);
 
   if (project.image) {
-    const targetWidth = variant === 'panel' ? 1000 : 700;
-    const optimizedSrc = optimizeImageUrl(project.image, { width: targetWidth });
-    const srcSet = getOptimizedSrcSet(project.image, [400, 700, 1000]);
-
     return (
       <div className="absolute inset-0 overflow-hidden bg-surface/50">
         <img
-          src={optimizedSrc}
-          srcSet={srcSet}
-          sizes={
-            variant === 'panel'
-              ? '(max-width: 768px) 100vw, 800px'
-              : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px'
-          }
+          src={project.image}
           alt={project.imageAlt ?? project.title}
           loading="lazy"
           decoding="async"

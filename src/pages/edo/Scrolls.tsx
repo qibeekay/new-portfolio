@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useProjects } from '../../contexts/ProjectsContext';
 import { CATEGORIES } from '../../utils/projectMeta';
-import { optimizeImageUrl } from '../../utils/image';
 import type { ProjectCategory, ProjectStatus } from '../../types/portfolio';
 
 const EASE: [number, number, number, number] = [0.23, 1, 0.32, 1];
@@ -123,7 +122,7 @@ export function Scrolls() {
                   <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
                     {project.image ?
                       <img
-                        src={optimizeImageUrl(project.image, { width: 700 })}
+                        src={project.image}
                         alt={project.imageAlt ?? project.title}
                         loading="lazy"
                         decoding="async"

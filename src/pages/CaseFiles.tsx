@@ -9,7 +9,6 @@ import { issues } from '../data/issues';
 import { useProjects } from '../contexts/ProjectsContext';
 import { CATEGORIES, categoryLabel } from '../utils/projectMeta';
 import { categorySpot } from '../utils/themeColors';
-import { optimizeImageUrl } from '../utils/image';
 import type { ProjectCategory, ProjectStatus, SpotColor } from '../types/portfolio';
 
 const issue = issues[3];
@@ -166,7 +165,7 @@ export function CaseFiles() {
               {active.image ?
                 <figure className="relative mb-6 aspect-[16/9] overflow-hidden border-[3px] border-ink bg-ink">
                   <img
-                    src={optimizeImageUrl(active.image, { width: 900 })}
+                    src={active.image}
                     alt={active.imageAlt ?? active.title}
                     loading="lazy"
                     decoding="async"
